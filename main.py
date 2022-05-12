@@ -1,5 +1,6 @@
 import re
 import nltk
+from math import factorial
 
 
 def handle_text(text):
@@ -30,7 +31,7 @@ for author in authors:
     # Формируем профиль автора
     authorProfile = {}
     for item in sorted(frequency, key=frequency.get, reverse=True)[:alpha]:
-        authorProfile[item] = frequency[item] / (len(s) / n)
+        authorProfile[item] = frequency[item] / (len(s) - 4)
     # Добавляем профиль автора в список
     profiles[author] = authorProfile
 
@@ -46,7 +47,7 @@ with open("testData/test.txt", encoding='utf-8') as f:
     testProfile = nltk.FreqDist(testProfile)
     # Выберем 5 наиболее часто встречающихся тетраграмм
     for item in sorted(testProfile, key=testProfile.get, reverse=True)[:alpha]:
-        testTextProfile[item] = testProfile[item] / (len(test) / n)
+        testTextProfile[item] = testProfile[item] / (len(test) - 4)
 
 # Пройдёмся по каждому из авторов и вычислим "расстояние" между профилем автора и профилем текста
 distances = {}
